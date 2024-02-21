@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donor Display</title>
+  <title>Pledge Dashboard</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      text-align: center;
       background-color: #f4f4f4;
       margin: 0;
       padding: 0;
@@ -15,57 +14,60 @@
     }
 
     header {
-      background-color: #2ecc71;
+      background-color: #3498db;
       color: #fff;
-      padding: 10px;
-      font-size: 24px;
+      padding: 20px;
+      font-size: 32px;
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1;
     }
 
-    #donorContainer {
+    #dashboard {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      margin-top: 60px;
+      margin-top: 80px;
+      padding: 20px;
       overflow: hidden;
-      height: calc(100vh - 60px);
     }
 
     .donorItem {
       background-color: #fff;
       border: 1px solid #ddd;
       border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 10px;
-      width: 300px;
+      padding: 20px;
+      margin-bottom: 20px;
+      width: 80%;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease-in-out;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      font-size: 16px;
+      font-size: 18px;
+      text-align: left;
     }
 
     #totalAmount {
-      font-size: 24px;
-      color: #2ecc71;
-      margin-bottom: 20px;
+      font-size: 32px;
+      color: #3498db;
+      margin-bottom: 40px;
     }
   </style>
 </head>
 <body>
-  <header>Pledge Tracker</header>
-  <div id="donorContainer"></div>
-  <p id="totalAmount">Total Amount Pledged: $<span></span></p>
+  <header>Pledge Dashboard</header>
+  <div id="dashboard">
+    <h2 id="totalAmount">Total Amount Pledged: $<span></span></h2>
+    <div id="donorContainer"></div>
+  </div>
 
   <script>
     function updateDisplay(data) {
       var totalAmount = data.amounts.reduce((sum, amount) => sum + amount, 0);
-      document.getElementById('totalAmount').querySelector('span').textContent = totalAmount;
+      document.getElementById('totalAmount').querySelector('span').textContent = totalAmount.toLocaleString(); // Use localeString for better number formatting
 
       var donorContainer = document.getElementById('donorContainer');
       donorContainer.innerHTML = '';
@@ -73,7 +75,7 @@
       data.names.forEach(function (name, index) {
         var donorItem = document.createElement('div');
         donorItem.className = 'donorItem';
-        donorItem.textContent = name + ": $" + data.amounts[index];
+        donorItem.textContent = `${name}: $${data.amounts[index].toLocaleString()}`;
         donorContainer.appendChild(donorItem);
       });
     }
