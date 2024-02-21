@@ -55,7 +55,7 @@
     #totalAmount {
       font-size: 48px;
       color: #2ecc71;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     #numDonors {
@@ -65,10 +65,11 @@
     }
 
     #donorInfoContainer {
-      max-height: 500px;
+      max-height: 250px;
       overflow-y: auto;
       padding: 20px;
       border-radius: 10px;
+      background-color: #f9f9f9;
     }
 
     #donorInfo {
@@ -117,10 +118,18 @@
 
   <div id="main">
     <div id="left">
-      <h2>Total Amount Raised</h2>
-      <p id="totalAmount">$<span id="totalAmountValue">0</span></p>
-      <h2>Number of Donors</h2>
-      <p id="numDonors">0</p>
+      <div>
+        <h2>Total Amount Raised</h2>
+        <p id="totalAmount">$<span id="totalAmountValue">0</span></p>
+      </div>
+      <div>
+        <h2>Number of Donors</h2>
+        <p id="numDonors">0</p>
+      </div>
+      <h2>Donor Information</h2>
+      <div id="donorInfoContainer">
+        <div id="donorInfo"></div>
+      </div>
     </div>
 
     <div id="right">
