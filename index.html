@@ -94,7 +94,8 @@
 
   <script>
     function updateDisplay(data) {
-      document.getElementById('totalAmountValue').textContent = data.totalAmount;
+      var totalAmount = data.amounts.reduce((total, amount) => total + amount, 0);
+      document.getElementById('totalAmountValue').textContent = totalAmount;
 
       var donorList = data.names.map(function (name, index) {
         return '<div class="donorEntry"><div class="donorName">' + name + '</div><div class="donorAmount">$' + data.amounts[index] + '</div></div>';
