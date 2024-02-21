@@ -1,59 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Program Name</title>
-  <style>
-    /* Your CSS styles remain unchanged */
-  </style>
+  <base target="_top">
+  <link rel="stylesheet" href="https://example.com/path/to/stylesheet.css"> <!-- Include your actual stylesheet URL -->
 </head>
 <body>
-  <div class="header">Your Program Name</div>
-  <div class="campaign-header">Campaign: Fundraising</div>
-  <div id="container">
-    <div id="totalAmount">
-      <p id="totalAmountRaised">Total Amount Pledged: $<span id="totalAmountSpan">0</span></p>
-    </div>
-    <div id="donorContainer">
-      <div class="donorList" id="donorListContainer">
-        <!-- Donor items will be dynamically inserted here -->
-      </div>
-    </div>
+  <div class="container">
+    <h1 id="campaignHeader">Pleasure Tracker</h1>
+    <h2>Campaign: <span id="campaignName"></span></h2>
+    <p>Total Amount: $<span id="totalAmount"></span></p>
+    <table id="donorTable">
+      <tr>
+        <th>Donor Name</th>
+        <th>Amount Pledged</th>
+      </tr>
+    </table>
   </div>
 
   <script>
-    function updateDisplay(data) {
-      var totalAmountSpan = document.getElementById('totalAmountSpan');
-      if (totalAmountSpan) {
-        totalAmountSpan.textContent = data.totalAmountPledged;
-      }
+    // Set values from Apps Script
+    document.getElementById('campaignName').innerText = campaignName;
+    document.getElementById('totalAmount').innerText = totalAmount;
 
-      var donorListContainer = document.getElementById('donorListContainer');
-      if (donorListContainer) {
-        donorListContainer.innerHTML = '';
-
-        if (data.names.length > 0) {
-          data.names.forEach(function (name, index) {
-            var donorItem = document.createElement('div');
-            donorItem.className = 'donorItem';
-            donorItem.textContent = name + ": $" + data.amounts[index];
-            donorListContainer.appendChild(donorItem);
-          });
-        }
-      }
-    }
-
-    // Fetch data from the server every few seconds
-    function fetchData() {
-      google.script.run.withSuccessHandler(updateDisplay).getData();
-      setTimeout(fetchData, 5000); // Adjust the interval as needed
-    }
-
-    // Initial fetch when the page loads
-    window.onload = function () {
-      fetchData();
-    };
+    // Populate donor data
+    var donorTable = document.getElementById('donorTable');
+    donorData.forEach(function(donor) {
+      var row = donorTable.insertRow(-1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      cell1.innerText = donor[0];
+      cell2.innerText = donor[1];
+    });
   </script>
 </body>
 </html>
