@@ -42,8 +42,6 @@
 
     #right {
       height: 600px; /* Updated height to 600px */
-      position: relative;
-      overflow: hidden;
     }
 
     #left {
@@ -72,16 +70,18 @@
     }
 
     #donorInfoContainer {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      animation: rotateNames linear infinite;
+      height: 100%;
+      overflow: hidden; /* Hide overflowing content */
+      padding: 20px;
+      border-radius: 10px;
     }
 
     #donorInfo {
       font-size: 18px;
       color: #333;
       text-align: left;
+      margin-top: 10px;
+      animation: scrollNames linear infinite;
     }
 
     .donorEntry {
@@ -103,13 +103,13 @@
       color: #2ecc71;
     }
 
-    @keyframes rotateNames {
+    @keyframes scrollNames {
       0% {
         transform: translateY(0);
       }
 
       100% {
-        transform: translateY(-100%);
+        transform: translateY(calc(-100% * var(--count)));
       }
     }
   </style>
@@ -145,6 +145,9 @@
       document.getElementById('donorInfo').innerHTML = donorList.join("");
       document.getElementById('totalAmountValue').textContent = data.totalAmount * data.names.length;
       document.getElementById('numDonors').textContent = data.names.length;
+
+      // Set a CSS variable to the number of donors for animation
+      document.documentElement.style.setProperty('--count', data.names.length);
     }
 
     // Fetch data from the server every few seconds
