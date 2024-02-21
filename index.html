@@ -31,8 +31,8 @@
       align-items: center;
       justify-content: flex-start;
       margin-top: 60px;
-      overflow: hidden;
-      height: calc(100vh - 60px);
+      overflow-y: auto;
+      max-height: calc(100vh - 60px);
     }
 
     .donorItem {
@@ -64,17 +64,22 @@
 
   <script>
     function updateDisplay(data) {
-      document.getElementById('totalAmount').querySelector('span').textContent = data.totalAmount;
+      var totalAmountElement = document.getElementById('totalAmount').querySelector('span');
+      if (totalAmountElement) {
+        totalAmountElement.textContent = data.totalAmount;
+      }
 
       var donorContainer = document.getElementById('donorContainer');
-      donorContainer.innerHTML = '';
+      if (donorContainer) {
+        donorContainer.innerHTML = '';
 
-      data.names.forEach(function (name, index) {
-        var donorItem = document.createElement('div');
-        donorItem.className = 'donorItem';
-        donorItem.textContent = name + ": $" + data.amounts[index];
-        donorContainer.appendChild(donorItem);
-      });
+        data.names.forEach(function (name, index) {
+          var donorItem = document.createElement('div');
+          donorItem.className = 'donorItem';
+          donorItem.textContent = name + ": $" + data.amounts[index];
+          donorContainer.appendChild(donorItem);
+        });
+      }
     }
 
     // Fetch data from the server every few seconds
