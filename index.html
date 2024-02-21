@@ -64,7 +64,8 @@
 
   <script>
     function updateDisplay(data) {
-      document.getElementById('totalAmount').querySelector('span').textContent = data.totalAmount;
+var totalAmount = data.amounts.reduce((sum, amount) => sum + amount, 0);
+document.getElementById('totalAmount').querySelector('span').textContent = totalAmount;
 
       var donorContainer = document.getElementById('donorContainer');
       donorContainer.innerHTML = '';
