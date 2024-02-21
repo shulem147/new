@@ -14,7 +14,7 @@
       overflow: hidden;
     }
 
-    header {
+    .header {
       background-color: #2ecc71;
       color: #fff;
       padding: 10px;
@@ -25,14 +25,18 @@
       z-index: 1;
     }
 
+    #totalAmountHeader {
+      top: 60px;
+    }
+
     #container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      margin-top: 60px;
+      margin-top: 120px; /* Adjusted margin for both headers */
       overflow: hidden;
-      max-height: calc(100vh - 60px);
+      max-height: calc(100vh - 120px); /* Adjusted max-height for both headers */
       padding: 20px;
       box-sizing: border-box;
     }
@@ -40,12 +44,6 @@
     #donorContainer {
       width: 100%;
       overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .scrolling-container {
-      animation: scroll 20s linear infinite;
-      display: inline-block;
       white-space: nowrap;
     }
 
@@ -57,7 +55,6 @@
       margin-bottom: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       font-size: 20px;
-      display: inline-block;
       max-width: calc(100% - 20px);
       white-space: nowrap;
       overflow: hidden;
@@ -68,6 +65,10 @@
       font-size: 24px;
       color: #2ecc71;
       margin-bottom: 20px;
+    }
+
+    .scrolling-container {
+      animation: scroll 20s linear infinite;
     }
 
     @keyframes scroll {
@@ -81,10 +82,11 @@
   </style>
 </head>
 <body>
-  <header>Pledge Tracker</header>
+  <div class="header">Pledge Tracker</div>
+  <div id="totalAmountHeader" class="header">Total Amount Raised</div>
   <div id="container">
-    <p id="totalAmount">Total Amount Pledged: $<span></span></p>
     <div id="donorContainer" class="scrolling-container"></div>
+    <p id="totalAmount">$<span></span></p>
   </div>
 
   <script>
@@ -99,17 +101,12 @@
         donorContainer.innerHTML = '';
 
         if (data.names.length > 0) {
-          var scrollingContainer = document.createElement('div');
-          scrollingContainer.className = 'scrolling-container';
-
           data.names.forEach(function (name, index) {
             var donorItem = document.createElement('div');
             donorItem.className = 'donorItem';
             donorItem.textContent = name + ": $" + data.amounts[index];
-            scrollingContainer.appendChild(donorItem);
+            donorContainer.appendChild(donorItem);
           });
-
-          donorContainer.appendChild(scrollingContainer);
         }
       }
     }
