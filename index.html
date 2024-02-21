@@ -1,166 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Donor Display</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Arial', sans-serif;
       text-align: center;
-      background-color: #f5f5f5;
+      background-color: #f4f4f4;
       margin: 0;
       padding: 0;
-      overflow: hidden; /* Disable scrolling with the mouse */
     }
 
-    header {
-      background-color: #3498db;
-      color: #fff;
-      padding: 20px;
-      font-size: 24px;
-    }
-
-    #main {
-      display: flex;
-      padding: 20px;
-      justify-content: space-around;
-    }
-
-    #left,
-    #right {
-      flex: 1;
-      padding: 20px;
-      border: 1px solid #ddd;
-      background-color: #fff;
-      margin: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #right {
-      height: 600px; /* Updated height to 600px */
-    }
-
-    #left {
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    h1,
-    h2 {
+    h1 {
       color: #333;
     }
 
     #totalAmount {
-      font-size: 48px;
-      color: #2ecc71;
-      margin-bottom: 20px;
-    }
-
-    #numDonors {
       font-size: 24px;
-      color: #3498db;
-      margin-bottom: 20px;
-    }
-
-    #donorInfoContainer {
-      height: 100%;
-      overflow: hidden; /* Hide overflowing content */
-      padding: 20px;
-      border-radius: 10px;
+      color: #2ecc71; /* Green color, you can change it */
     }
 
     #donorInfo {
       font-size: 18px;
       color: #333;
-      text-align: left;
-      margin-top: 10px;
-      animation: scrollNames linear infinite;
-    }
-
-    .donorEntry {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .donorName {
-      flex: 2;
-      text-align: left;
-      font-weight: bold;
-    }
-
-    .donorAmount {
-      flex: 1;
-      text-align: right;
-      color: #2ecc71;
-    }
-
-    @keyframes scrollNames {
-      0% {
-        transform: translateY(0);
-      }
-
-      100% {
-        transform: translateY(calc(-100% * var(--count)));
-      }
+      margin-top: 20px; /* Adjust the margin as needed */
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>Donor Display</h1>
-  </header>
-
-  <div id="main">
-    <div id="left">
-      <h2>Total Amount Raised</h2>
-      <p id="totalAmount">$<span id="totalAmountValue">0</span></p>
-      <h2>Number of Donors</h2>
-      <p id="numDonors">0</p>
-    </div>
-
-    <div id="right">
-      <h2>Donor Information</h2>
-      <div id="donorInfoContainer">
-        <div id="donorInfo"></div>
-      </div>
-    </div>
-  </div>
+  <h1>Pledge Tracker</h1>
+  <p>Total Amount Pledged: $<span id="totalAmount"></span></p>
+  <div id="donorInfo"></div>
 
   <script>
     function updateDisplay(data) {
+      document.getElementById('totalAmount').textContent = data.totalAmount;
+      
       var donorList = data.names.map(function (name, index) {
-        return '<div class="donorEntry"><div class="donorName">' + name + '</div><div class="donorAmount">$' + data.amounts[index] + '</div></div>';
+        return name + ": $" + data.amounts[index];
       });
 
-      document.getElementById('donorInfo').innerHTML = donorList.join("");
-      document.getElementById('totalAmountValue').textContent = data.totalAmount * data.names.length;
-      document.getElementById('numDonors').textContent = data.names.length;
-
-      // Set a CSS variable to the number of donors for animation
-      document.documentElement.style.setProperty('--count', data.names.length);
+      document.getElementById('donorInfo').innerHTML = donorList.join("<br>");
     }
 
     // Fetch data from the server every few seconds
     function fetchData() {
-      google.script.run.withSuccessHandler(updateDisplay).getData(); // Assuming getData is a function in your Google Apps Script
+      google.script.run.withSuccessHandler(updateDisplay).getData();
+      setTimeout(fetchData, 5000); // Adjust the interval as needed
     }
 
     // Initial fetch when the page loads
     window.onload = function () {
       fetchData();
-      setInterval(fetchData, 5000);
     };
   </script>
 </body>
-
 </html>
