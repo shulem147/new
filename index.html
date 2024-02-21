@@ -33,7 +33,6 @@
       display: flex;
       width: 100%;
       height: calc(100vh - 64px);
-      justify-content: center;
       align-items: center;
     }
 
@@ -53,7 +52,7 @@
     .donorList {
       animation: scroll 20s linear infinite;
       overflow-y: auto;
-      max-height: 300px;
+      max-height: calc(100vh - 180px); /* Adjusted height to fit more donors */
     }
 
     .donorItem {
@@ -73,7 +72,7 @@
     #totalAmountRaised {
       font-size: 36px;
       color: #2ecc71;
-      margin-bottom: 20px;
+      margin-bottom: 10px; /* Adjusted margin */
     }
 
     @keyframes scroll {
@@ -91,7 +90,7 @@
   <div class="campaign-header">Campaign: Fundraising</div>
   <div id="container">
     <div id="totalAmount">
-      <p id="totalAmountRaised">Total Amount Raised: $<span id="totalAmountSpan"><!-- Data from Google Apps Script --></span></p>
+      <p id="totalAmountRaised">Total Amount Pledged: $<span id="totalAmountSpan"><!-- Replace with actual data --></span></p>
     </div>
     <div id="donorContainer">
       <div class="donorList" id="donorListContainer">
@@ -104,7 +103,7 @@
     function updateDisplay(data) {
       var totalAmountSpan = document.getElementById('totalAmountSpan');
       if (totalAmountSpan) {
-        totalAmountSpan.textContent = data.totalAmountRaised; // Replace with actual data property
+        totalAmountSpan.textContent = data.totalAmountPledged; // Replace with actual data property
       }
 
       var donorListContainer = document.getElementById('donorListContainer');
