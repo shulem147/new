@@ -50,16 +50,18 @@
     .donorList {
       animation: scroll 20s linear infinite;
       display: inline-block;
+      max-height: 300px; /* Adjusted maximum height for better fit */
+      overflow: auto; /* Added overflow to enable scrolling within the container */
     }
 
     .donorItem {
       background-color: #fff;
       border: 1px solid #ddd;
       border-radius: 8px;
-      padding: 15px;
+      padding: 10px; /* Adjusted padding for better fit */
       margin-bottom: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      font-size: 20px;
+      font-size: 18px; /* Adjusted font size for better fit */
       max-width: calc(100% - 20px);
       white-space: nowrap;
       overflow: hidden;
@@ -67,18 +69,9 @@
     }
 
     #totalAmountRaised {
-      font-size: 24px;
+      font-size: 36px; /* Increased font size for better visibility */
       color: #2ecc71;
       margin-bottom: 20px;
-    }
-
-    @keyframes scroll {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(calc(-100% + 60px)); /* Adjusted to cover the header */
-      }
     }
   </style>
 </head>
