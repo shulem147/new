@@ -1,36 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <base target="_top">
-  <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/shulem147/system/main/stylesheet.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donor Display</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #totalAmount {
+      font-size: 24px;
+      color: #2ecc71; /* Green color, you can change it */
+    }
+
+    #donorInfo {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px; /* Adjust the margin as needed */
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1 id="campaignHeader">Pleasure Tracker</h1>
-    <h2>Campaign: <span id="campaignName"></span></h2>
-    <p>Total Amount: $<span id="totalAmount"></span></p>
-    <table id="donorTable">
-      <tr>
-        <th>Donor Name</th>
-        <th>Amount Pledged</th>
-      </tr>
-    </table>
-  </div>
+  <h1>Pledge Tracker</h1>
+  <p>Total Amount Pledged: $<span id="totalAmount"></span></p>
+  <div id="donorInfo"></div>
 
   <script>
-    // Set values from Apps Script
-    document.getElementById('campaignName').innerText = campaignName;
-    document.getElementById('totalAmount').innerText = totalAmount;
+    function updateDisplay(data) {
+      document.getElementById('totalAmount').textContent = data.totalAmount;
+      
+      var donorList = data.names.map(function (name, index) {
+        return name + ": $" + data.amounts[index];
+      });
 
-    // Populate donor data
-    var donorTable = document.getElementById('donorTable');
-    donorData.forEach(function(donor) {
-      var row = donorTable.insertRow(-1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      cell1.innerText = donor[0];
-      cell2.innerText = donor[1];
-    });
+      document.getElementById('donorInfo').innerHTML = donorList.join("<br>");
+    }
+
+    // Fetch data from the server every few seconds
+    function fetchData() {
+      google.script.run.withSuccessHandler(updateDisplay).getData();
+      setTimeout(fetchData, 5000); // Adjust the interval as needed
+    }
+
+    // Initial fetch when the page loads
+    window.onload = function () {
+      fetchData();
+    };
   </script>
 </body>
 </html>
