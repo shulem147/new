@@ -20,20 +20,10 @@
       padding: 20px;
     }
 
-    #banner {
-      /* Adjust height and styling for the banner section */
-      height: 80px;
-      width: 30%; /* Fixed size for a 55-inch screen */
-      background-color: #e74c3c; /* Example background color */
-      color: #fff;
-      padding: 10px;
-      float: left;
-    }
-
     #main {
       display: flex;
       padding: 20px;
-      justify-content: space-around; /* Improved spacing for larger screens */
+      justify-content: space-around;
     }
 
     #left,
@@ -48,7 +38,6 @@
     }
 
     #left {
-      /* Adjust the height of the donor information box */
       height: 600px;
     }
 
@@ -66,7 +55,7 @@
     }
 
     #donorInfoContainer {
-      max-height: 500px; /* Adjust the height of the donor information container */
+      max-height: 500px;
       overflow: hidden;
     }
 
@@ -75,7 +64,6 @@
       color: #333;
       text-align: left;
       animation: rotateAnimation 30s linear infinite;
-      /* Adjust the duration as needed */
     }
 
     .donorEntry {
@@ -83,12 +71,11 @@
       justify-content: space-between;
       padding: 10px;
       border-bottom: 1px solid #ddd;
-      animation: donationFall 10s linear infinite; /* Adjust the duration as needed */
+      animation: donationFall 10s linear infinite;
     }
 
     .donorName {
       flex: 2;
-      /* Adjust the width as needed */
       text-align: left;
       font-weight: bold;
     }
@@ -125,15 +112,10 @@
     <h1>Donor Display - Pledge Tracker</h1>
   </header>
 
-  <!-- Banner Section on the left -->
-  <div id="banner">
-    <!-- Your banner content goes here -->
-  </div>
-
   <div id="main">
     <div id="left">
       <h2>Total Amount Raised</h2>
-      <p id="totalAmount">$<span id="totalAmountValue"></span></p>
+      <p id="totalAmount">$<span id="totalAmountValue">5000</span></p>
     </div>
 
     <div id="right">
@@ -146,9 +128,6 @@
 
   <script>
     function updateDisplay(data) {
-      var totalAmount = data.amounts.reduce((total, amount) => total + amount, 0);
-      document.getElementById('totalAmountValue').textContent = totalAmount;
-
       var donorList = data.names.map(function (name, index) {
         return '<div class="donorEntry"><div class="donorName">' + name + '</div><div class="donorAmount">$' + data.amounts[index] + '</div></div>';
       });
@@ -160,7 +139,6 @@
     function fetchData() {
       google.script.run.withSuccessHandler(updateDisplay).getData();
       setTimeout(fetchData, 5000);
-      // Adjust the interval as needed
     }
 
     // Initial fetch when the page loads
