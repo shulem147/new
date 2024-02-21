@@ -20,13 +20,24 @@
       padding: 20px;
     }
 
+    #banner {
+      /* Adjust height and styling for the banner section */
+      height: 80px;
+      width: 30%; /* Fixed size for a 55-inch screen */
+      background-color: #e74c3c; /* Example background color */
+      color: #fff;
+      padding: 10px;
+      float: left;
+    }
+
     #main {
       display: flex;
       padding: 20px;
       justify-content: space-around; /* Improved spacing for larger screens */
     }
 
-    #left {
+    #left,
+    #right {
       flex: 1;
       padding: 20px;
       border: 1px solid #ddd;
@@ -36,12 +47,9 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    #banner {
-      /* Adjust height and styling for the banner section */
-      height: 80px;
-      background-color: #e74c3c; /* Example background color */
-      color: #fff;
-      padding: 10px;
+    #left {
+      /* Adjust the height of the donor information box */
+      height: 600px;
     }
 
     h1,
@@ -75,6 +83,7 @@
       justify-content: space-between;
       padding: 10px;
       border-bottom: 1px solid #ddd;
+      animation: donationFall 10s linear infinite; /* Adjust the duration as needed */
     }
 
     .donorName {
@@ -91,13 +100,21 @@
     }
 
     @keyframes rotateAnimation {
-      0%,
-      100% {
+      0%, 100% {
         transform: translateY(0%);
       }
 
       50% {
-        transform: translateY(-50%);
+        transform: translateY(-100%);
+      }
+    }
+
+    @keyframes donationFall {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(100%);
       }
     }
   </style>
@@ -108,13 +125,13 @@
     <h1>Donor Display - Pledge Tracker</h1>
   </header>
 
+  <!-- Banner Section on the left -->
+  <div id="banner">
+    <!-- Your banner content goes here -->
+  </div>
+
   <div id="main">
     <div id="left">
-      <!-- Banner Section only on the left -->
-      <div id="banner">
-        <!-- Your banner content goes here -->
-      </div>
-
       <h2>Total Amount Raised</h2>
       <p id="totalAmount">$<span id="totalAmountValue"></span></p>
     </div>
