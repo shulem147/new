@@ -33,13 +33,29 @@
       margin: 10px;
     }
 
+    #left {
+      text-align: left;
+    }
+
     h1, h2 {
       color: #333;
     }
 
     #totalAmount {
-      font-size: 24px;
-      color: #2ecc71; /* Green color, you can change it */
+      font-size: 36px;
+      color: #e74c3c; /* Red color for excitement, you can change it */
+      border: 2px solid #e74c3c;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    .donorName {
+      border: 1px solid #ddd;
+      padding: 8px;
+      margin-bottom: 8px;
+      display: inline-block;
+      border-radius: 4px;
     }
 
     #donorInfo {
@@ -57,7 +73,7 @@
   <div id="main">
     <div id="left">
       <h2>Total Amount Raised</h2>
-      <p>$<span id="totalAmount"></span></p>
+      <p id="totalAmount">$<span id="totalAmountValue"></span></p>
     </div>
 
     <div id="right">
@@ -68,10 +84,10 @@
 
   <script>
     function updateDisplay(data) {
-      document.getElementById('totalAmount').textContent = data.totalAmount;
+      document.getElementById('totalAmountValue').textContent = data.totalAmount;
       
       var donorList = data.names.map(function (name, index) {
-        return name + ": $" + data.amounts[index];
+        return '<span class="donorName">' + name + '</span>: $' + data.amounts[index];
       });
 
       document.getElementById('donorInfo').innerHTML = donorList.join("<br>");
