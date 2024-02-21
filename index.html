@@ -80,10 +80,10 @@
     }
 
     @keyframes rotateAnimation {
-      from {
+      0%, 100% {
         transform: translateY(0%);
       }
-      to {
+      50% {
         transform: translateY(-100%);
       }
     }
@@ -114,7 +114,7 @@
       document.getElementById('totalAmountValue').textContent = totalAmount;
 
       // Reverse the order of donor entries (LIFO)
-      var donorList = data.names.reverse().map(function (name, index) {
+      var donorList = data.names.slice().reverse().map(function (name, index) {
         return '<div class="donorEntry"><div class="donorName">' + name + '</div><div class="donorAmount">$' + data.amounts[index] + '</div></div>';
       });
 
