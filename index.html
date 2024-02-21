@@ -73,7 +73,7 @@
       justify-content: space-between;
       padding: 10px;
       border-bottom: 1px solid #ddd;
-      animation: donationFall 5s linear infinite; /* Adjust the duration as needed */
+      animation: donationFall 5s linear infinite;
     }
 
     .donorName {
@@ -130,10 +130,6 @@
 
   <script>
     function updateDisplay(data) {
-      // Reverse the data order for LIFO
-      data.names.reverse();
-      data.amounts.reverse();
-
       var donorList = data.names.map(function (name, index) {
         return '<div class="donorEntry"><div class="donorName">' + name + '</div><div class="donorAmount">$' + data.amounts[index] + '</div></div>';
       });
