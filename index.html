@@ -13,36 +13,61 @@
       padding: 0;
     }
 
-    h1 {
-      color: #333;
+    header {
+      background-color: #2ecc71;
+      color: #fff;
+      padding: 10px;
+      font-size: 24px;
+    }
+
+    #donorContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .donorItem {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .donorItem:hover {
+      transform: scale(1.05);
     }
 
     #totalAmount {
       font-size: 24px;
-      color: #2ecc71; /* Green color, you can change it */
-    }
-
-    #donorInfo {
-      font-size: 18px;
-      color: #333;
-      margin-top: 20px; /* Adjust the margin as needed */
+      color: #2ecc71;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Pledge Tracker</h1>
-  <p>Total Amount Pledged: $<span id="totalAmount"></span></p>
-  <div id="donorInfo"></div>
+  <header>Pledge Tracker</header>
+  <div id="donorContainer"></div>
+  <p id="totalAmount">Total Amount Pledged: $<span></span></p>
 
   <script>
     function updateDisplay(data) {
-      document.getElementById('totalAmount').textContent = data.totalAmount;
-      
-      var donorList = data.names.map(function (name, index) {
-        return name + ": $" + data.amounts[index];
-      });
+      document.getElementById('totalAmount').querySelector('span').textContent = data.totalAmount;
 
-      document.getElementById('donorInfo').innerHTML = donorList.join("<br>");
+      var donorContainer = document.getElementById('donorContainer');
+      donorContainer.innerHTML = '';
+
+      data.names.forEach(function (name, index) {
+        var donorItem = document.createElement('div');
+        donorItem.className = 'donorItem';
+        donorItem.textContent = name + ": $" + data.amounts[index];
+        donorContainer.appendChild(donorItem);
+      });
     }
 
     // Fetch data from the server every few seconds
