@@ -169,4 +169,21 @@
       data.names.forEach(function (name, index) {
         var donorItem = document.createElement('div');
         donorItem.className = 'donorItem';
-        donorItem.innerHTML = `<div
+        donorItem.innerHTML = `<div>${name}</div><div>${"$" + data.amounts[index]}</div>`;
+        donorContainer.appendChild(donorItem);
+      });
+    }
+
+    // Fetch data from the server every 5 seconds
+    function fetchData() {
+      google.script.run.withSuccessHandler(updateDisplay).getData();
+      setTimeout(fetchData, 5000); // Update every 5 seconds
+    }
+
+    // Initial fetch when the page loads
+    window.onload = function () {
+      fetchData();
+    };
+  </script>
+</body>
+</html>
