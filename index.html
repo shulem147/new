@@ -67,7 +67,7 @@
 
     #donorInfoContainer {
       height: 100%;
-      overflow-y: auto;
+      overflow: hidden; /* Hide overflowing content */
       padding: 20px;
       border-radius: 10px;
     }
@@ -77,6 +77,7 @@
       color: #333;
       text-align: left;
       margin-top: 10px;
+      animation: scrollNames linear infinite;
     }
 
     .donorEntry {
@@ -96,6 +97,16 @@
       flex: 1;
       text-align: right;
       color: #2ecc71;
+    }
+
+    @keyframes scrollNames {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(calc(-100% * var(--count)));
+      }
     }
   </style>
 </head>
@@ -130,17 +141,35 @@
       document.getElementById('donorInfo').innerHTML = donorList.join("");
       document.getElementById('totalAmountValue').textContent = data.totalAmount * data.names.length;
       document.getElementById('numDonors').textContent = data.names.length;
+
+      // Set a CSS variable to the number of donors for animation
+      document.documentElement.style.setProperty('--count', data.names.length);
+    }
+
+    // Placeholder function for data fetching (replace with your actual data fetching mechanism)
+    function fetchData() {
+      // Example data (replace this with your actual data fetching logic)
+      var mockData = {
+        names: ["John Doe", "Jane Smith", "Bob Johnson"],
+        amounts: [50, 100, 75],
+        totalAmount: 225
+      };
+
+      updateDisplay(mockData); // Update the display with fetched data
+
+      // Uncomment the following line and replace it with your actual data fetching logic
+      // fetch('your_data_fetching_endpoint').then(response => response.json()).then(updateDisplay);
     }
 
     // Fetch data from the server every few seconds
-    function fetchData() {
-      google.script.run.withSuccessHandler(updateDisplay).getData(); // Assuming getData is a function in your Google Apps Script
+    function startDataFetching() {
+      fetchData();
+      setInterval(fetchData, 5000);
     }
 
     // Initial fetch when the page loads
     window.onload = function () {
-      fetchData();
-      setInterval(fetchData, 5000);
+      startDataFetching();
     };
   </script>
 </body>
