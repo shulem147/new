@@ -40,10 +40,11 @@
     #donorContainer {
       width: 100%;
       overflow: hidden;
+      white-space: nowrap;
     }
 
     .scrolling-container {
-      display: flex;
+      display: inline-block;
       animation: scroll 20s linear infinite;
     }
 
@@ -51,14 +52,10 @@
       background-color: #fff;
       border: 1px solid #ddd;
       border-radius: 8px;
-      padding: 10px;
-      margin-right: 10px;
+      padding: 15px;
+      margin-bottom: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      font-size: 16px;
-      max-width: 200px;
+      font-size: 20px;
     }
 
     #totalAmount {
@@ -69,10 +66,10 @@
 
     @keyframes scroll {
       0% {
-        transform: translateX(100%);
+        transform: translateY(100%);
       }
       100% {
-        transform: translateX(-100%);
+        transform: translateY(-100%);
       }
     }
   </style>
