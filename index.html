@@ -46,10 +46,25 @@
       justify-content: center;
     }
 
+    #donorInfoContainer {
+      max-height: 200px; /* Adjust the height as needed */
+      overflow: hidden;
+    }
+
     #donorInfo {
       font-size: 18px;
       color: #333;
       text-align: left;
+      animation: rotateDonors 20s linear infinite; /* Adjust the duration as needed */
+    }
+
+    @keyframes rotateDonors {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-100%);
+      }
     }
 
     .donorEntry {
@@ -87,7 +102,9 @@
 
     <div id="right">
       <h2>Donor Information</h2>
-      <div id="donorInfo"></div>
+      <div id="donorInfoContainer">
+        <div id="donorInfo"></div>
+      </div>
     </div>
   </div>
 
