@@ -11,6 +11,7 @@
       background-color: #f4f4f4;
       margin: 0;
       padding: 0;
+      overflow: hidden;
     }
 
     header {
@@ -18,14 +19,20 @@
       color: #fff;
       padding: 10px;
       font-size: 24px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1;
     }
 
     #donorContainer {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin-top: 20px;
+      justify-content: flex-start;
+      margin-top: 60px;
+      overflow: hidden;
+      height: calc(100vh - 60px);
     }
 
     .donorItem {
@@ -37,16 +44,16 @@
       width: 300px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease-in-out;
-    }
-
-    .donorItem:hover {
-      transform: scale(1.05);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 16px;
     }
 
     #totalAmount {
       font-size: 24px;
       color: #2ecc71;
-      margin-top: 20px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
