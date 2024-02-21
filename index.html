@@ -17,8 +17,8 @@
     header {
       background-color: #2ecc71;
       color: #fff;
-      padding: 10px;
-      font-size: 24px;
+      padding: 20px;
+      font-size: 28px;
       position: fixed;
       width: 100%;
       top: 0;
@@ -30,14 +30,23 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-top: 60px;
+      margin-top: 80px;
       padding: 20px;
       overflow: hidden;
-      height: calc(100vh - 80px);
+      height: calc(100vh - 100px);
     }
 
     #leftPanel {
       flex: 1;
+      text-align: left;
+    }
+
+    #leftPanelBox {
+      background-color: #fff;
+      border: 2px solid #2ecc71;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
       text-align: left;
     }
 
@@ -54,14 +63,12 @@
       border-radius: 10px;
       overflow: hidden;
       margin: 10px auto;
-      position: relative;
     }
 
     #donorContainer {
       display: flex;
       flex-direction: column;
-      animation: rotate 30s linear infinite;
-      transform-origin: 50% 100%;
+      animation: rotate 15s infinite linear;
     }
 
     .donorItem {
@@ -69,7 +76,7 @@
       border: 1px solid #ddd;
       border-radius: 10px;
       padding: 20px;
-      margin: 10px 0;
+      margin-bottom: 20px;
       width: 100%;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       display: flex;
@@ -81,8 +88,8 @@
     }
 
     @keyframes rotate {
-      from { transform: rotateX(0deg); }
-      to { transform: rotateX(360deg); }
+      from { transform: translateY(0); }
+      to { transform: translateY(-100%); }
     }
 
     #totalAmount {
@@ -101,8 +108,10 @@
   <header>Pledge Dashboard</header>
   <div id="dashboardContainer">
     <div id="leftPanel">
-      <p id="totalAmount">Total Amount Pledged: $<span></span></p>
-      <p id="totalDonors">Total Donors: <span></span></p>
+      <div id="leftPanelBox">
+        <p id="totalAmount">Total Amount Pledged: $<span></span></p>
+        <p id="totalDonors">Total Donors: <span></span></p>
+      </div>
     </div>
     <div id="rightPanel">
       <div id="rotatingBox">
@@ -131,7 +140,7 @@
     // Fetch data from the server every few seconds
     function fetchData() {
       google.script.run.withSuccessHandler(updateDisplay).getData();
-      setTimeout(fetchData, 15000); // Adjust the interval as needed
+      setTimeout(fetchData, 10000); // Adjust the interval as needed
     }
 
     // Initial fetch when the page loads
