@@ -48,8 +48,8 @@
     }
 
     #rotatingBox {
-      width: 300px;
-      height: 300px;
+      width: 70%;
+      height: 70vh;
       border: 2px solid #2ecc71;
       border-radius: 10px;
       overflow: hidden;
@@ -59,20 +59,23 @@
     #donorContainer {
       display: flex;
       flex-direction: column;
-      animation: rotate 10s infinite linear;
+      animation: rotate 15s infinite linear;
     }
 
     .donorItem {
       background-color: #fff;
       border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 10px;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
       width: 100%;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       white-space: nowrap;
       text-overflow: ellipsis;
-      font-size: 16px;
+      font-size: 20px;
     }
 
     @keyframes rotate {
@@ -118,7 +121,7 @@
       data.names.forEach(function (name, index) {
         var donorItem = document.createElement('div');
         donorItem.className = 'donorItem';
-        donorItem.textContent = name + ": $" + data.amounts[index];
+        donorItem.innerHTML = `<div>${name}</div><div>${"$" + data.amounts[index]}</div>`;
         donorContainer.appendChild(donorItem);
       });
     }
@@ -126,7 +129,7 @@
     // Fetch data from the server every few seconds
     function fetchData() {
       google.script.run.withSuccessHandler(updateDisplay).getData();
-      setTimeout(fetchData, 5000); // Adjust the interval as needed
+      setTimeout(fetchData, 10000); // Adjust the interval as needed
     }
 
     // Initial fetch when the page loads
