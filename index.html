@@ -5,11 +5,137 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pledge Dashboard</title>
   <style>
-    /* Your CSS styles go here */
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    header {
+      background-color: #2ecc71;
+      color: #fff;
+      padding: 20px;
+      font-size: 28px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1;
+      text-align: center;
+    }
+
+    #topBar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    #leftPanel, #rightPanel {
+      flex: 1;
+      height: calc(100vh - 100px);
+      overflow: auto;
+    }
+
+    #dashboardContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 100px;
+      padding: 20px;
+      overflow: hidden;
+      height: calc(100vh - 100px);
+    }
+
+    #leftPanel {
+      text-align: left;
+      padding: 20px;
+    }
+
+    #causeBox,
+    #leftPanelBox {
+      background-color: #fff;
+      border: 2px solid #2ecc71;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    #rightPanel {
+      text-align: right;
+      padding: 20px;
+    }
+
+    #rotatingBox {
+      width: 80%;
+      height: 70vh;
+      border: 2px solid #2ecc71;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px auto;
+      animation: rotate 30s infinite linear;
+    }
+
+    #donorContainer {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .donorItem {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      white-space: nowrap;
+      font-size: 22px;
+      height: 60px;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(calc(-100% - 20px));
+      }
+    }
+
+    #totalAmount,
+    #totalDonors {
+      margin: 0;
+    }
+
+    #totalAmount span,
+    #totalDonors span {
+      font-weight: bold;
+      color: #2ecc71;
+    }
   </style>
 </head>
 <body>
   <header>Pledge Dashboard</header>
+  <div id="topBar">
+    <div>
+      <h1>Your Organization</h1>
+    </div>
+    <div>
+      <p>Welcome, Secretary!</p>
+      <!-- Add any other relevant information or buttons here -->
+    </div>
+  </div>
+
   <div id="dashboardContainer">
     <div id="leftPanel">
       <div id="causeBox">
