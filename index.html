@@ -55,16 +55,7 @@
       font-size: 18px;
       color: #333;
       text-align: left;
-      animation: rotateDonors 20s linear infinite; /* Adjust the duration as needed */
-    }
-
-    @keyframes rotateDonors {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-100%);
-      }
+      animation: rotateAnimation 20s linear infinite; /* Adjust the duration as needed */
     }
 
     .donorEntry {
@@ -86,6 +77,15 @@
     .donorAmount {
       text-align: right;
       color: #2ecc71;
+    }
+
+    @keyframes rotateAnimation {
+      from {
+        transform: translateY(0%);
+      }
+      to {
+        transform: translateY(-100%);
+      }
     }
   </style>
 </head>
