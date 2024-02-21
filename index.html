@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donor Display</title>
+  <title>Pledge Tracker</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -24,15 +24,28 @@
       z-index: 1;
     }
 
+    #campaignName {
+      font-size: 20px;
+      color: #2ecc71;
+      margin-bottom: 10px;
+    }
+
     #totalAmountHeader {
-      top: 60px;
+      font-size: 18px;
+      color: #2ecc71;
+    }
+
+    #totalAmount {
+      font-size: 30px;
+      color: #2ecc71;
+      margin-bottom: 20px;
     }
 
     #container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       margin-top: 120px; /* Adjusted margin for both headers */
       overflow: hidden;
       max-height: calc(100vh - 120px); /* Adjusted max-height for both headers */
@@ -42,9 +55,8 @@
 
     #donorContainer {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column-reverse; /* Start from the bottom */
+      align-items: center;
       width: 100%;
       overflow: hidden;
     }
@@ -54,45 +66,41 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       padding: 15px;
-      margin: 10px;
+      margin: 10px 0; /* Adjusted margin for better spacing */
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      font-size: 20px;
-      max-width: calc(50% - 20px); /* Adjusted max-width for two donors in a row */
+      font-size: 18px;
+      max-width: calc(100% - 20px);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-    }
-
-    #totalAmount {
-      font-size: 24px;
-      color: #2ecc71;
-      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
   <div class="header">Pledge Tracker</div>
-  <div id="totalAmountHeader" class="header">Total Amount Raised: $<span></span></div>
   <div id="container">
+    <div id="campaignName">Campaign Fundraising</div>
+    <div id="totalAmountHeader">Total Amount To Raise:</div>
+    <div id="totalAmount">$10,000</div>
     <div id="donorContainer"></div>
   </div>
 
   <script>
     function updateDisplay(data) {
-      var totalAmountElement = document.getElementById('totalAmountHeader').querySelector('span');
+      var totalAmountElement = document.getElementById('totalAmount');
       if (totalAmountElement) {
-        totalAmountElement.textContent = data.totalAmount;
+        totalAmountElement.textContent = "$" + data.totalAmountToRaise;
       }
 
       var donorContainer = document.getElementById('donorContainer');
       if (donorContainer) {
         donorContainer.innerHTML = '';
 
-        if (data.names.length > 0) {
-          data.names.forEach(function (name, index) {
+        if (data.donors.length > 0) {
+          data.donors.forEach(function (donor) {
             var donorItem = document.createElement('div');
             donorItem.className = 'donorItem';
-            donorItem.textContent = name + ": $" + data.amounts[index];
+            donorItem.textContent = donor.name + ": $" + donor.amount;
             donorContainer.appendChild(donorItem);
           });
         }
