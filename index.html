@@ -26,11 +26,20 @@
       text-align: center;
     }
 
+    #causeHeader {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px;
+      font-size: 20px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
     #dashboardContainer {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-top: 80px;
+      margin-top: 20px; /* Adjusted margin to create space above the left box */
       padding: 20px;
       overflow: hidden;
       height: calc(100vh - 100px);
@@ -39,6 +48,7 @@
     #leftPanel {
       flex: 1;
       text-align: left;
+      margin-top: auto; /* Moved the left box to the bottom */
     }
 
     #leftPanelBox {
@@ -106,6 +116,7 @@
 </head>
 <body>
   <header>Pledge Dashboard</header>
+  <div id="causeHeader">Fundraising for a Special Cause</div>
   <div id="dashboardContainer">
     <div id="leftPanel">
       <div id="leftPanelBox">
