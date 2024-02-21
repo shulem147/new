@@ -44,6 +44,22 @@
     #rightPanel {
       flex: 1;
       text-align: right;
+      overflow: hidden;
+    }
+
+    #rotatingBox {
+      width: 300px;
+      height: 300px;
+      border: 2px solid #2ecc71;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px auto;
+    }
+
+    #donorContainer {
+      display: flex;
+      flex-direction: column;
+      animation: rotate 10s infinite linear;
     }
 
     .donorItem {
@@ -52,13 +68,16 @@
       border-radius: 8px;
       padding: 10px;
       margin-bottom: 10px;
-      width: 300px;
+      width: 100%;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease-in-out;
-      overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       font-size: 16px;
+    }
+
+    @keyframes rotate {
+      from { transform: translateY(0); }
+      to { transform: translateY(-100%); }
     }
 
     #totalAmount {
@@ -81,7 +100,9 @@
       <p id="totalDonors">Total Donors: <span></span></p>
     </div>
     <div id="rightPanel">
-      <div id="donorContainer"></div>
+      <div id="rotatingBox">
+        <div id="donorContainer"></div>
+      </div>
     </div>
   </div>
 
