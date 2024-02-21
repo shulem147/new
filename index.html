@@ -44,9 +44,9 @@
     }
 
     .scrolling-container {
+      animation: scroll 20s linear infinite;
       display: inline-block;
-      width: 100%;
-      overflow: hidden;
+      white-space: nowrap;
     }
 
     .donorItem {
@@ -58,6 +58,10 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       font-size: 20px;
       display: inline-block;
+      max-width: calc(100% - 20px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     #totalAmount {
@@ -94,7 +98,7 @@
       if (donorContainer) {
         donorContainer.innerHTML = '';
 
-        if (data.names.length > 20) {
+        if (data.names.length > 0) {
           var scrollingContainer = document.createElement('div');
           scrollingContainer.className = 'scrolling-container';
 
@@ -106,13 +110,6 @@
           });
 
           donorContainer.appendChild(scrollingContainer);
-        } else {
-          data.names.forEach(function (name, index) {
-            var donorItem = document.createElement('div');
-            donorItem.className = 'donorItem';
-            donorItem.textContent = name + ": $" + data.amounts[index];
-            donorContainer.appendChild(donorItem);
-          });
         }
       }
     }
