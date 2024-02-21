@@ -17,7 +17,22 @@
       background-color: #3498db; /* Blue color, you can change it */
       color: #fff;
       padding: 10px;
-      margin-bottom: 20px;
+    }
+
+    #main {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    #left {
+      flex: 1;
+      text-align: left;
+    }
+
+    #right {
+      flex: 1;
+      text-align: right;
     }
 
     h1 {
@@ -32,7 +47,7 @@
     #donorInfo {
       font-size: 18px;
       color: #333;
-      margin-top: 20px; /* Adjust the margin as needed */
+      text-align: left;
     }
   </style>
 </head>
@@ -41,10 +56,17 @@
     <h1>Donor Display - Pledge Tracker</h1>
   </header>
 
-  <main>
-    <p>Total Amount Pledged: $<span id="totalAmount"></span></p>
-    <div id="donorInfo"></div>
-  </main>
+  <div id="main">
+    <div id="left">
+      <h2>Total Amount Raised</h2>
+      <p>$<span id="totalAmount"></span></p>
+    </div>
+
+    <div id="right">
+      <h2>Donor Information</h2>
+      <div id="donorInfo"></div>
+    </div>
+  </div>
 
   <script>
     function updateDisplay(data) {
