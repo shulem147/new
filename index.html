@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +20,22 @@
       padding: 20px;
     }
 
+    #banner {
+      /* Adjust height and styling for the banner section */
+      height: 80px;
+      background-color: #e74c3c; /* Example background color */
+      color: #fff;
+      padding: 10px;
+    }
+
     #main {
       display: flex;
       padding: 20px;
+      justify-content: space-around; /* Improved spacing for larger screens */
     }
 
-    #left, #right {
+    #left,
+    #right {
       flex: 1;
       padding: 20px;
       border: 1px solid #ddd;
@@ -34,7 +45,8 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    h1, h2 {
+    h1,
+    h2 {
       color: #333;
     }
 
@@ -47,7 +59,8 @@
     }
 
     #donorInfoContainer {
-      max-height: 200px; /* Adjust the height as needed */
+      max-height: 200px;
+      /* Adjust the height as needed */
       overflow: hidden;
     }
 
@@ -55,7 +68,8 @@
       font-size: 18px;
       color: #333;
       text-align: left;
-      animation: rotateAnimation 20s linear infinite; /* Adjust the duration as needed */
+      animation: rotateAnimation 20s linear infinite;
+      /* Adjust the duration as needed */
     }
 
     .donorEntry {
@@ -66,7 +80,8 @@
     }
 
     .donorName {
-      flex: 2; /* Adjust the width as needed */
+      flex: 2;
+      /* Adjust the width as needed */
       text-align: left;
       font-weight: bold;
     }
@@ -78,17 +93,25 @@
     }
 
     @keyframes rotateAnimation {
-      0%, 100% {
+      0%,
+      100% {
         transform: translateY(0%);
       }
+
       50% {
         transform: translateY(-100%);
       }
     }
   </style>
 </head>
+
 <body>
   <header>
+    <!-- Banner Section -->
+    <div id="banner">
+      <!-- Your banner content goes here -->
+    </div>
+
     <h1>Donor Display - Pledge Tracker</h1>
   </header>
 
@@ -121,7 +144,8 @@
     // Fetch data from the server every few seconds
     function fetchData() {
       google.script.run.withSuccessHandler(updateDisplay).getData();
-      setTimeout(fetchData, 5000); // Adjust the interval as needed
+      setTimeout(fetchData, 5000);
+      // Adjust the interval as needed
     }
 
     // Initial fetch when the page loads
@@ -130,4 +154,5 @@
     };
   </script>
 </body>
+
 </html>
