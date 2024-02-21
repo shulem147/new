@@ -146,30 +146,15 @@
       document.documentElement.style.setProperty('--count', data.names.length);
     }
 
-    // Placeholder function for data fetching (replace with your actual data fetching mechanism)
-    function fetchData() {
-      // Example data (replace this with your actual data fetching logic)
-      var mockData = {
-        names: ["John Doe", "Jane Smith", "Bob Johnson"],
-        amounts: [50, 100, 75],
-        totalAmount: 225
-      };
-
-      updateDisplay(mockData); // Update the display with fetched data
-
-      // Uncomment the following line and replace it with your actual data fetching logic
-      // fetch('your_data_fetching_endpoint').then(response => response.json()).then(updateDisplay);
-    }
-
     // Fetch data from the server every few seconds
-    function startDataFetching() {
-      fetchData();
-      setInterval(fetchData, 5000);
+    function fetchData() {
+      google.script.run.withSuccessHandler(updateDisplay).getData(); // Assuming getData is a function in your Google Apps Script
     }
 
     // Initial fetch when the page loads
     window.onload = function () {
-      startDataFetching();
+      fetchData();
+      setInterval(fetchData, 5000);
     };
   </script>
 </body>
