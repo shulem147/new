@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donor Display</title>
+  <title>Pledge Tracker</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -13,16 +13,16 @@
       padding: 0;
     }
 
-    .header {
+    .static-header {
       background-color: #2ecc71;
       color: #fff;
       padding: 10px;
       font-size: 24px;
     }
 
-    #campaignName {
+    .campaign-header {
       font-size: 30px;
-      margin-bottom: 10px;
+      margin: 10px 0;
     }
 
     #container {
@@ -66,7 +66,7 @@
       text-overflow: ellipsis;
     }
 
-    #totalAmountToday {
+    #totalAmountRaised {
       font-size: 24px;
       color: #2ecc71;
       margin-bottom: 20px;
@@ -83,12 +83,12 @@
   </style>
 </head>
 <body>
-  <div class="header">Pledge Tracker</div>
-  <div id="campaignName">Campaign: Fundraising</div>
+  <div class="static-header">Pledge Tracker</div>
+  <div class="campaign-header">Campaign: Fundraising</div>
   <div id="container">
     <div id="totalAmount">
-      <p id="totalAmountToday">Total Amount Today: $<span></span></p>
-      <p>Total Amount to Raise: $100,000</p> <!-- Replace with the actual amount -->
+      <p id="totalAmountRaised">Total Amount Raised: $<span></span></p>
+      <!-- You can replace the above line with the actual total amount raised -->
     </div>
     <div id="donorContainer">
       <div class="donorList"></div>
@@ -97,9 +97,9 @@
 
   <script>
     function updateDisplay(data) {
-      var totalAmountElement = document.getElementById('totalAmountToday').querySelector('span');
+      var totalAmountElement = document.getElementById('totalAmountRaised').querySelector('span');
       if (totalAmountElement) {
-        totalAmountElement.textContent = data.totalAmountToday; // Adjusted for the actual data property
+        totalAmountElement.textContent = data.totalAmountRaised; // Replace with the actual data property
       }
 
       var donorContainer = document.querySelector('.donorList');
