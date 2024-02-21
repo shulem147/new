@@ -82,15 +82,15 @@
   </style>
 </head>
 <body>
-  <div class="header">Total Amount Raised: $<span id="totalAmountValue"></span></div>
-  <div id="totalAmountHeader" class="header">Pledge Tracker</div>
+  <div class="header">Pledge Tracker</div>
+  <div id="totalAmountHeader" class="header">Total Amount Raised: $<span></span></div>
   <div id="container">
     <div id="donorContainer" class="scrolling-container"></div>
   </div>
 
   <script>
     function updateDisplay(data) {
-      var totalAmountElement = document.getElementById('totalAmountValue');
+      var totalAmountElement = document.getElementById('totalAmountHeader').querySelector('span');
       if (totalAmountElement) {
         totalAmountElement.textContent = data.totalAmount;
       }
@@ -100,12 +100,17 @@
         donorContainer.innerHTML = '';
 
         if (data.names.length > 0) {
+          var scrollingContainer = document.createElement('div');
+          scrollingContainer.className = 'scrolling-container';
+
           data.names.forEach(function (name, index) {
             var donorItem = document.createElement('div');
             donorItem.className = 'donorItem';
             donorItem.textContent = name + ": $" + data.amounts[index];
-            donorContainer.appendChild(donorItem);
+            scrollingContainer.appendChild(donorItem);
           });
+
+          donorContainer.appendChild(scrollingContainer);
         }
       }
     }
