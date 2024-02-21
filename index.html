@@ -22,7 +22,9 @@
     #main {
       display: flex;
       justify-content: space-around;
+      align-items: center;
       padding: 20px;
+      height: 100vh; /* Full height of the viewport */
     }
 
     #left, #right {
@@ -40,6 +42,12 @@
     }
 
     #totalAmount {
+      font-size: 36px;
+      color: #2ecc71;
+    }
+
+    #totalAmount::before {
+      content: "$";
       font-size: 24px;
       color: #2ecc71;
     }
@@ -59,7 +67,7 @@
   <div id="main">
     <div id="left">
       <h2>Total Amount Raised</h2>
-      <p>$<span id="totalAmount"></span></p>
+      <p id="totalAmount"></p>
     </div>
 
     <div id="right">
@@ -70,7 +78,7 @@
 
   <script>
     function updateDisplay(data) {
-      document.getElementById('totalAmount').textContent = data.totalAmount;
+      document.getElementById('totalAmount').innerHTML = "$" + data.totalAmount;
       
       var donorList = data.names.map(function (name, index) {
         return name + ": $" + data.amounts[index];
