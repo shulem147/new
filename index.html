@@ -73,19 +73,18 @@
     }
 
     #rotatingBox {
-      width: 100%; /* Adjusted width to 100% */
+      width: 100%;
       height: 70vh;
       border: 2px solid #2ecc71;
       border-radius: 10px;
       overflow: hidden;
       margin: 10px auto;
-      animation: rotate 30s linear infinite; /* Adjusted animation */
     }
 
     #donorContainer {
-      display: flex;
-      flex-direction: column;
-      animation: scrollList 30s linear infinite; /* New animation for scrolling */
+      max-height: 100%;
+      overflow-y: hidden;
+      animation: scrollText 30s linear infinite;
     }
 
     .donorItem {
@@ -103,17 +102,7 @@
       height: 60px;
     }
 
-    @keyframes rotate {
-      from {
-        transform: translateY(0);
-      }
-
-      to {
-        transform: translateY(calc(-100% - 20px));
-      }
-    }
-
-    @keyframes scrollList {
+    @keyframes scrollText {
       from {
         transform: translateY(0);
       }
@@ -176,4 +165,23 @@
       donorContainer.innerHTML = '';
 
       data.names.forEach(function (name, index) {
-        var
+        var donorItem = document.createElement('div');
+        donorItem.className = 'donorItem';
+        donorItem.innerHTML = `<div>${name}</div><div>${"$" + data.amounts[index]}</div>`;
+        donorContainer.appendChild(donorItem);
+      });
+    }
+
+    // Fetch data from the server every 15 seconds
+    function fetchData() {
+      google.script.run.withSuccessHandler(updateDisplay).getData();
+      setTimeout(fetchData, 15000); // Update every 15 seconds
+    }
+
+    // Initial fetch when the page loads
+    window.onload = function () {
+      fetchData();
+    };
+  </script>
+</body>
+</html>
