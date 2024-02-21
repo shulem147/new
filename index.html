@@ -20,22 +20,13 @@
       padding: 20px;
     }
 
-    #banner {
-      /* Adjust height and styling for the banner section */
-      height: 80px;
-      background-color: #e74c3c; /* Example background color */
-      color: #fff;
-      padding: 10px;
-    }
-
     #main {
       display: flex;
       padding: 20px;
       justify-content: space-around; /* Improved spacing for larger screens */
     }
 
-    #left,
-    #right {
+    #left {
       flex: 1;
       padding: 20px;
       border: 1px solid #ddd;
@@ -45,9 +36,12 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    #left {
-      /* Adjust the height of the donor information box */
-      height: 400px;
+    #banner {
+      /* Adjust height and styling for the banner section */
+      height: 80px;
+      background-color: #e74c3c; /* Example background color */
+      color: #fff;
+      padding: 10px;
     }
 
     h1,
@@ -64,7 +58,7 @@
     }
 
     #donorInfoContainer {
-      max-height: 350px; /* Adjust the height of the donor information container */
+      max-height: 500px; /* Adjust the height of the donor information container */
       overflow: hidden;
     }
 
@@ -72,7 +66,7 @@
       font-size: 18px;
       color: #333;
       text-align: left;
-      animation: rotateAnimation 20s linear infinite;
+      animation: rotateAnimation 30s linear infinite;
       /* Adjust the duration as needed */
     }
 
@@ -103,7 +97,7 @@
       }
 
       50% {
-        transform: translateY(-100%);
+        transform: translateY(-50%);
       }
     }
   </style>
@@ -114,13 +108,13 @@
     <h1>Donor Display - Pledge Tracker</h1>
   </header>
 
-  <!-- Banner Section under the header -->
-  <div id="banner">
-    <!-- Your banner content goes here -->
-  </div>
-
   <div id="main">
     <div id="left">
+      <!-- Banner Section only on the left -->
+      <div id="banner">
+        <!-- Your banner content goes here -->
+      </div>
+
       <h2>Total Amount Raised</h2>
       <p id="totalAmount">$<span id="totalAmountValue"></span></p>
     </div>
