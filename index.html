@@ -45,6 +45,11 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
+    #left {
+      /* Adjust the height of the donor information box */
+      height: 400px;
+    }
+
     h1,
     h2 {
       color: #333;
@@ -59,8 +64,7 @@
     }
 
     #donorInfoContainer {
-      max-height: 200px;
-      /* Adjust the height as needed */
+      max-height: 350px; /* Adjust the height of the donor information container */
       overflow: hidden;
     }
 
@@ -107,13 +111,13 @@
 
 <body>
   <header>
-    <!-- Banner Section -->
-    <div id="banner">
-      <!-- Your banner content goes here -->
-    </div>
-
     <h1>Donor Display - Pledge Tracker</h1>
   </header>
+
+  <!-- Banner Section under the header -->
+  <div id="banner">
+    <!-- Your banner content goes here -->
+  </div>
 
   <div id="main">
     <div id="left">
