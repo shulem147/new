@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pledge Dashboard</title>
+  <title>Fundraising Event Dashboard</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -56,7 +56,7 @@
       padding: 20px;
     }
 
-    #causeBox,
+    #eventDetails,
     #leftPanelBox {
       background-color: #fff;
       border: 2px solid #2ecc71;
@@ -69,21 +69,11 @@
     #rightPanel {
       text-align: right;
       padding: 20px;
-      position: relative; /* Added position relative */
-    }
-
-    #rotatingBox {
-      width: 100%; /* Adjusted width to 100% */
-      height: 70vh;
-      border: 2px solid #2ecc71;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 10px auto;
-      animation: rotate 30s infinite linear;
+      position: relative;
     }
 
     #donorContainer {
-      max-height: 100%; /* Added max-height to limit height */
+      max-height: 100%;
       overflow-y: auto;
     }
 
@@ -102,45 +92,36 @@
       height: 60px;
     }
 
-    @keyframes rotate {
-      from {
-        transform: translateY(0);
+    @media only screen and (min-width: 1024px) {
+      /* Adjust styles for larger screens */
+      #dashboardContainer {
+        padding: 50px;
       }
-
-      to {
-        transform: translateY(calc(-100% - 20px));
+      #leftPanel, #rightPanel {
+        flex: 0.5;
+        height: calc(100vh - 100px);
       }
-    }
-
-    #totalAmount,
-    #totalDonors {
-      margin: 0;
-    }
-
-    #totalAmount span,
-    #totalDonors span {
-      font-weight: bold;
-      color: #2ecc71;
     }
   </style>
 </head>
 <body>
-  <header>Pledge Dashboard</header>
+  <header>Fundraising Event Dashboard</header>
   <div id="topBar">
     <div>
-      <h1>Your Organization</h1>
+      <h1>Your Fundraising Event</h1>
     </div>
     <div>
-      <p>Welcome, Secretary!</p>
+      <p>Welcome, Attendee!</p>
       <!-- Add any other relevant information or buttons here -->
     </div>
   </div>
 
   <div id="dashboardContainer">
     <div id="leftPanel">
-      <div id="causeBox">
-        <p>Cause of Fundraising:</p>
-        <p>Insert your cause description here.</p>
+      <div id="eventDetails">
+        <p>Event Date: January 1, 2025</p>
+        <p>Location: Your Venue</p>
+        <!-- Add more event details as needed -->
       </div>
       <div id="leftPanelBox">
         <p id="totalAmount">Total Amount Pledged: $<span></span></p>
@@ -148,9 +129,7 @@
       </div>
     </div>
     <div id="rightPanel">
-      <div id="rotatingBox">
-        <div id="donorContainer"></div>
-      </div>
+      <div id="donorContainer"></div>
     </div>
   </div>
 
