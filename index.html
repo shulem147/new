@@ -42,38 +42,14 @@
 
     #right {
       height: 600px; /* Updated height to 600px */
-    }
-
-    #left {
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    h1,
-    h2 {
-      color: #333;
-    }
-
-    #totalAmount {
-      font-size: 48px;
-      color: #2ecc71;
-      margin-bottom: 20px;
-    }
-
-    #numDonors {
-      font-size: 24px;
-      color: #3498db;
-      margin-bottom: 20px;
+      overflow: hidden; /* Hide overflowing content */
+      position: relative;
     }
 
     #donorInfoContainer {
-      height: 100%;
-      overflow: hidden; /* Hide overflowing content */
-      padding: 20px;
-      border-radius: 10px;
+      position: absolute;
+      bottom: 0;
+      animation: rotateNames linear infinite;
     }
 
     #donorInfo {
@@ -81,7 +57,6 @@
       color: #333;
       text-align: left;
       margin-top: 10px;
-      animation: scrollNames linear infinite;
     }
 
     .donorEntry {
@@ -103,7 +78,7 @@
       color: #2ecc71;
     }
 
-    @keyframes scrollNames {
+    @keyframes rotateNames {
       0% {
         transform: translateY(0);
       }
@@ -129,7 +104,6 @@
     </div>
 
     <div id="right">
-      <h2>Donor Information</h2>
       <div id="donorInfoContainer">
         <div id="donorInfo"></div>
       </div>
