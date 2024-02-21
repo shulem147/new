@@ -6,8 +6,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Donor Display - Pledge Tracker</title>
   <style>
-    /* Your existing styles */
-    /* ... */
+    body {
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #3498db;
+      color: #fff;
+      padding: 20px;
+      font-size: 24px;
+    }
+
+    #tabs {
+      display: flex;
+      justify-content: space-around;
+      background-color: #2c3e50;
+      padding: 10px;
+    }
+
+    .tab {
+      color: #ecf0f1;
+      cursor: pointer;
+    }
+
+    #main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #left,
+    #right {
+      flex: 1;
+      padding: 20px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1,
+    h2 {
+      color: #333;
+    }
+
+    #totalAmount {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    #totalDonors {
+      font-size: 24px;
+      color: #333;
+    }
+
+    #donorInfoContainer {
+      display: flex;
+      flex-direction: column;
+      max-height: 50vh;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    #donorInfo {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      animation: scrollLoop 10s linear infinite; /* Adjust the timing as needed */
+    }
+
+    @keyframes scrollLoop {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(calc(-100% - 10px)); /* Adjust the spacing as needed */
+      }
+    }
+
+    .donorEntry {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .donorName {
+      flex: 2;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .donorAmount {
+      flex: 1;
+      text-align: right;
+      color: #2ecc71;
+    }
   </style>
 </head>
 
@@ -16,10 +124,18 @@
     <h1>Donor Display - Pledge Tracker</h1>
   </header>
 
+  <div id="tabs">
+    <div class="tab">Tab 1</div>
+    <div class="tab">Tab 2</div>
+    <!-- Add more tabs as needed -->
+  </div>
+
   <div id="main">
     <div id="left">
       <h2>Total Amount Raised</h2>
       <p id="totalAmount">$<span id="totalAmountValue">5000</span></p>
+      <h2>Total Donors</h2>
+      <p id="totalDonorsValue">0</p>
     </div>
 
     <div id="right">
@@ -32,12 +148,14 @@
 
   <script>
     function updateDisplay(data) {
+      document.getElementById('totalAmountValue').textContent = data.totalAmount;
+      document.getElementById('totalDonorsValue').textContent = data.names.length;
+
       var donorList = data.names.map(function (name, index) {
         return '<div class="donorEntry"><div class="donorName">' + name + '</div><div class="donorAmount">$' + data.amounts[index] + '</div></div>';
       });
 
       document.getElementById('donorInfo').innerHTML = donorList.join("");
-      document.getElementById('totalAmountValue').textContent = data.totalAmount;
     }
 
     // Fetch data from the server every few seconds
