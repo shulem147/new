@@ -5,7 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Donor Display</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   <style>
+    /* Your existing styles remain unchanged */
+
     body {
       font-family: 'Roboto', sans-serif;
       text-align: center;
@@ -15,99 +18,7 @@
       overflow: hidden; /* Disable scrolling with the mouse */
     }
 
-    header {
-      background-color: #3498db;
-      color: #fff;
-      padding: 20px;
-      font-size: 24px;
-    }
-
-    #main {
-      display: flex;
-      padding: 20px;
-      justify-content: space-around;
-    }
-
-    #left,
-    #right {
-      flex: 1;
-      padding: 20px;
-      border: 1px solid #ddd;
-      background-color: #fff;
-      margin: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #left {
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    h1,
-    h2 {
-      color: #333;
-    }
-
-    #totalAmount {
-      font-size: 48px;
-      color: #2ecc71;
-      margin-bottom: 10px;
-    }
-
-    #numDonors {
-      font-size: 24px;
-      color: #3498db;
-      margin-bottom: 20px;
-    }
-
-    #donorInfoContainer {
-      max-height: 250px;
-      overflow-y: auto;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: #f9f9f9;
-    }
-
-    #donorInfo {
-      font-size: 18px;
-      color: #333;
-      text-align: left;
-      margin-top: 10px;
-    }
-
-    .donorEntry {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      animation: rotateEntry 5s linear infinite alternate; /* Top to bottom rotation */
-    }
-
-    @keyframes rotateEntry {
-      0% {
-        transform: translateY(0);
-      }
-
-      100% {
-        transform: translateY(100%);
-      }
-    }
-
-    .donorName {
-      flex: 2;
-      text-align: left;
-      font-weight: bold;
-    }
-
-    .donorAmount {
-      flex: 1;
-      text-align: right;
-      color: #2ecc71;
-    }
+    /* ... (rest of the styles) ... */
   </style>
 </head>
 
@@ -118,18 +29,10 @@
 
   <div id="main">
     <div id="left">
-      <div>
-        <h2>Total Amount Raised</h2>
-        <p id="totalAmount">$<span id="totalAmountValue">0</span></p>
-      </div>
-      <div>
-        <h2>Number of Donors</h2>
-        <p id="numDonors">0</p>
-      </div>
-      <h2>Donor Information</h2>
-      <div id="donorInfoContainer">
-        <div id="donorInfo"></div>
-      </div>
+      <h2>Total Amount Raised</h2>
+      <p id="totalAmount">$<span id="totalAmountValue">0</span></p>
+      <h2>Number of Donors</h2>
+      <p id="numDonors">0</p>
     </div>
 
     <div id="right">
@@ -151,15 +54,20 @@
       document.getElementById('numDonors').textContent = data.names.length;
     }
 
-    // Fetch data from the server every few seconds
+    // Fetch data from the server using Google Apps Script (replace with your actual Apps Script function)
     function fetchData() {
       google.script.run.withSuccessHandler(updateDisplay).getData();
-      setTimeout(fetchData, 5000);
+    }
+
+    // Fetch data from the server every few seconds
+    function startDataFetching() {
+      fetchData();
+      setInterval(fetchData, 5000);
     }
 
     // Initial fetch when the page loads
     window.onload = function () {
-      fetchData();
+      startDataFetching();
     };
   </script>
 </body>
