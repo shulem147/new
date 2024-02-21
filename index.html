@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donor Display</title>
+  <title>Donor Display - Pledge Tracker</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -11,6 +11,13 @@
       background-color: #f4f4f4;
       margin: 0;
       padding: 0;
+    }
+
+    header {
+      background-color: #3498db; /* Blue color, you can change it */
+      color: #fff;
+      padding: 10px;
+      margin-bottom: 20px;
     }
 
     h1 {
@@ -30,9 +37,14 @@
   </style>
 </head>
 <body>
-  <h1>Pledge Tracker</h1>
-  <p>Total Amount Pledged: $<span id="totalAmount"></span></p>
-  <div id="donorInfo"></div>
+  <header>
+    <h1>Donor Display - Pledge Tracker</h1>
+  </header>
+
+  <main>
+    <p>Total Amount Pledged: $<span id="totalAmount"></span></p>
+    <div id="donorInfo"></div>
+  </main>
 
   <script>
     function updateDisplay(data) {
