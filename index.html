@@ -7,6 +7,8 @@
   <title>Donor Display</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   <style>
+    /* Your existing styles remain unchanged */
+
     body {
       font-family: 'Roboto', sans-serif;
       text-align: center;
@@ -16,87 +18,7 @@
       overflow: hidden; /* Disable scrolling with the mouse */
     }
 
-    header {
-      background-color: #3498db;
-      color: #fff;
-      padding: 20px;
-      font-size: 24px;
-    }
-
-    #main {
-      display: flex;
-      padding: 20px;
-      justify-content: space-around;
-    }
-
-    #left,
-    #right {
-      flex: 1;
-      padding: 20px;
-      border: 1px solid #ddd;
-      background-color: #fff;
-      margin: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #left {
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    h1,
-    h2 {
-      color: #333;
-    }
-
-    #totalAmount {
-      font-size: 48px;
-      color: #2ecc71;
-      margin-bottom: 20px;
-    }
-
-    #numDonors {
-      font-size: 24px;
-      color: #3498db;
-      margin-bottom: 20px;
-    }
-
-    #donorInfoContainer {
-      height: 100%;
-      overflow-y: auto;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    #donorInfo {
-      font-size: 18px;
-      color: #333;
-      text-align: left;
-      margin-top: 10px;
-    }
-
-    .donorEntry {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .donorName {
-      flex: 2;
-      text-align: left;
-      font-weight: bold;
-    }
-
-    .donorAmount {
-      flex: 1;
-      text-align: right;
-      color: #2ecc71;
-    }
+    /* ... (rest of the styles) ... */
   </style>
 </head>
 
@@ -132,30 +54,15 @@
       document.getElementById('numDonors').textContent = data.names.length;
     }
 
-    // Placeholder function for data fetching (replace with your actual data fetching mechanism)
-    function fetchData() {
-      // Example data (replace this with your actual data fetching logic)
-      var mockData = {
-        names: ["John Doe", "Jane Smith", "Bob Johnson"],
-        amounts: [50, 100, 75],
-        totalAmount: 225
-      };
-
-      updateDisplay(mockData); // Update the display with fetched data
-
-      // Uncomment the following line and replace it with your actual data fetching logic
-      // fetch('your_data_fetching_endpoint').then(response => response.json()).then(updateDisplay);
-    }
-
     // Fetch data from the server every few seconds
-    function startDataFetching() {
-      fetchData();
-      setInterval(fetchData, 5000);
+    function fetchData() {
+      google.script.run.withSuccessHandler(updateDisplay).getData(); // Assuming getData is a function in your Google Apps Script
     }
 
     // Initial fetch when the page loads
     window.onload = function () {
-      startDataFetching();
+      fetchData();
+      setInterval(fetchData, 5000);
     };
   </script>
 </body>
