@@ -45,7 +45,6 @@
 
     .scrolling-container {
       display: inline-block;
-      animation: scroll 20s linear infinite;
     }
 
     .donorItem {
@@ -56,6 +55,8 @@
       margin-bottom: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       font-size: 20px;
+      width: auto;
+      display: inline-block;
     }
 
     #totalAmount {
@@ -92,12 +93,26 @@
       if (donorContainer) {
         donorContainer.innerHTML = '';
 
-        data.names.forEach(function (name, index) {
-          var donorItem = document.createElement('div');
-          donorItem.className = 'donorItem';
-          donorItem.textContent = name + ": $" + data.amounts[index];
-          donorContainer.appendChild(donorItem);
-        });
+        if (data.names.length > 20) {
+          var scrollingContainer = document.createElement('div');
+          scrollingContainer.className = 'scrolling-container';
+
+          data.names.forEach(function (name, index) {
+            var donorItem = document.createElement('div');
+            donorItem.className = 'donorItem';
+            donorItem.textContent = name + ": $" + data.amounts[index];
+            scrollingContainer.appendChild(donorItem);
+          });
+
+          donorContainer.appendChild(scrollingContainer);
+        } else {
+          data.names.forEach(function (name, index) {
+            var donorItem = document.createElement('div');
+            donorItem.className = 'donorItem';
+            donorItem.textContent = name + ": $" + data.amounts[index];
+            donorContainer.appendChild(donorItem);
+          });
+        }
       }
     }
 
