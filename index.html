@@ -8,15 +8,15 @@
     body {
       font-family: 'Arial', sans-serif;
       text-align: center;
-      background-color: #f4f4f4;
+      background-color: #f5f5f5;
       margin: 0;
       padding: 0;
     }
 
     header {
-      background-color: #3498db; /* Blue color, you can change it */
+      background-color: #3498db;
       color: #fff;
-      padding: 10px;
+      padding: 20px;
     }
 
     #main {
@@ -31,10 +31,8 @@
       border: 1px solid #ddd;
       background-color: #fff;
       margin: 10px;
-    }
-
-    #left {
-      text-align: left;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     h1, h2 {
@@ -42,20 +40,8 @@
     }
 
     #totalAmount {
-      font-size: 36px;
-      color: #e74c3c; /* Red color for excitement, you can change it */
-      border: 2px solid #e74c3c;
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-    }
-
-    .donorName {
-      border: 1px solid #ddd;
-      padding: 8px;
-      margin-bottom: 8px;
-      display: inline-block;
-      border-radius: 4px;
+      font-size: 24px;
+      color: #2ecc71;
     }
 
     #donorInfo {
@@ -73,7 +59,7 @@
   <div id="main">
     <div id="left">
       <h2>Total Amount Raised</h2>
-      <p id="totalAmount">$<span id="totalAmountValue"></span></p>
+      <p>$<span id="totalAmount"></span></p>
     </div>
 
     <div id="right">
@@ -84,10 +70,10 @@
 
   <script>
     function updateDisplay(data) {
-      document.getElementById('totalAmountValue').textContent = data.totalAmount;
+      document.getElementById('totalAmount').textContent = data.totalAmount;
       
       var donorList = data.names.map(function (name, index) {
-        return '<span class="donorName">' + name + '</span>: $' + data.amounts[index];
+        return name + ": $" + data.amounts[index];
       });
 
       document.getElementById('donorInfo').innerHTML = donorList.join("<br>");
