@@ -29,7 +29,7 @@
     #dashboardContainer {
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: flex-start;
       margin-top: 80px;
       padding: 20px;
       overflow: hidden;
@@ -41,7 +41,8 @@
       text-align: left;
     }
 
-    #causeBox {
+    #causeBox,
+    #leftPanelBox {
       background-color: #fff;
       border: 2px solid #2ecc71;
       border-radius: 10px;
@@ -51,18 +52,12 @@
     }
 
     #leftPanelBox {
-      background-color: #fff;
-      border: 2px solid #2ecc71;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: left;
-      height: 60vh; /* Adjusted height */
+      height: 100%;
     }
 
     #rightPanel {
       flex: 1;
       text-align: right;
-      overflow: hidden;
     }
 
     #rotatingBox {
@@ -72,12 +67,13 @@
       border-radius: 10px;
       overflow: hidden;
       margin: 10px auto;
-      animation: rotate 40s infinite linear; /* Adjusted rotation speed */
+      animation: rotate 30s infinite linear;
     }
 
     #donorContainer {
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
     }
 
     .donorItem {
@@ -91,24 +87,29 @@
       justify-content: space-between;
       align-items: center;
       white-space: nowrap;
-      font-size: 42; /* Adjusted font size */
-      height: 60px; /* Adjusted height */
+      font-size: 22px;
+      height: 60px;
     }
 
     @keyframes rotate {
-      from { transform: translateY(0); }
-      to { transform: translateY(calc(-100% - 20px)); }
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(calc(-100% - 20px));
+      }
     }
 
-    #totalAmount {
-      font-size: 24px;
-      color: #2ecc71;
-      margin-bottom: 10px;
-    }
-
+    #totalAmount,
     #totalDonors {
-      font-size: 18px;
-      color: #333;
+      margin: 0;
+    }
+
+    #totalAmount span,
+    #totalDonors span {
+      font-weight: bold;
+      color: #2ecc71;
     }
   </style>
 </head>
@@ -133,26 +134,33 @@
   </div>
 
   <script>
+    async function fetchData() {
+      try {
+        const response = await fetch('/getData'); // Adjust the endpoint accordingly
+        const data = await response.json();
+
+        updateDisplay(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setTimeout(fetchData, 15000); // Update every 15 seconds
+      }
+    }
+
     function updateDisplay(data) {
-      var totalAmount = data.amounts.reduce((sum, amount) => sum + amount, 0);
+      const totalAmount = data.amounts.reduce((sum, amount) => sum + amount, 0);
       document.getElementById('totalAmount').querySelector('span').textContent = totalAmount;
       document.getElementById('totalDonors').querySelector('span').textContent = data.names.length;
 
-      var donorContainer = document.getElementById('donorContainer');
+      const donorContainer = document.getElementById('donorContainer');
       donorContainer.innerHTML = '';
 
-      data.names.forEach(function (name, index) {
-        var donorItem = document.createElement('div');
+      data.names.forEach((name, index) => {
+        const donorItem = document.createElement('div');
         donorItem.className = 'donorItem';
         donorItem.innerHTML = `<div>${name}</div><div>${"$" + data.amounts[index]}</div>`;
         donorContainer.appendChild(donorItem);
       });
-    }
-
-    // Fetch data from the server every 5 seconds
-    function fetchData() {
-      google.script.run.withSuccessHandler(updateDisplay).getData();
-      setTimeout(fetchData, 5000); // Update every 5 seconds
     }
 
     // Initial fetch when the page loads
