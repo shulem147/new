@@ -52,6 +52,27 @@
       color: #333;
       text-align: left;
     }
+
+    .donorEntry {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .donorName, .donorAmount {
+      flex: 1;
+    }
+
+    .donorName {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .donorAmount {
+      text-align: right;
+      color: #2ecc71;
+    }
   </style>
 </head>
 <body>
@@ -74,12 +95,12 @@
   <script>
     function updateDisplay(data) {
       document.getElementById('totalAmountValue').textContent = data.totalAmount;
-      
+
       var donorList = data.names.map(function (name, index) {
-        return name + ": $" + data.amounts[index];
+        return '<div class="donorEntry"><div class="donorName">' + name + '</div><div class="donorAmount">$' + data.amounts[index] + '</div></div>';
       });
 
-      document.getElementById('donorInfo').innerHTML = donorList.join("<br>");
+      document.getElementById('donorInfo').innerHTML = donorList.join("");
     }
 
     // Fetch data from the server every few seconds
