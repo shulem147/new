@@ -26,20 +26,11 @@
       text-align: center;
     }
 
-    #causeHeader {
-      background-color: #3498db;
-      color: #fff;
-      padding: 10px;
-      font-size: 20px;
-      text-align: center;
-      margin-top: 60px;
-    }
-
     #dashboardContainer {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-top: 20px; /* Adjusted margin to create space above the left box */
+      align-items: flex-end;
+      margin-top: 80px;
       padding: 20px;
       overflow: hidden;
       height: calc(100vh - 100px);
@@ -48,7 +39,15 @@
     #leftPanel {
       flex: 1;
       text-align: left;
-      margin-top: auto; /* Moved the left box to the bottom */
+    }
+
+    #causeBox {
+      background-color: #fff;
+      border: 2px solid #2ecc71;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: left;
     }
 
     #leftPanelBox {
@@ -56,7 +55,6 @@
       border: 2px solid #2ecc71;
       border-radius: 10px;
       padding: 20px;
-      margin-bottom: 20px;
       text-align: left;
     }
 
@@ -116,9 +114,12 @@
 </head>
 <body>
   <header>Pledge Dashboard</header>
-  <div id="causeHeader">Fundraising for a Special Cause</div>
   <div id="dashboardContainer">
     <div id="leftPanel">
+      <div id="causeBox">
+        <p>Cause of Fundraising:</p>
+        <p>Insert your cause description here.</p>
+      </div>
       <div id="leftPanelBox">
         <p id="totalAmount">Total Amount Pledged: $<span></span></p>
         <p id="totalDonors">Total Donors: <span></span></p>
