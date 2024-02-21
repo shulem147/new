@@ -72,9 +72,20 @@
       position: relative;
     }
 
+    #rotatingBox {
+      width: 100%; /* Adjusted width to 100% */
+      height: 70vh;
+      border: 2px solid #2ecc71;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px auto;
+      animation: rotate 30s linear infinite; /* Adjusted animation */
+    }
+
     #donorContainer {
-      max-height: 100%;
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      animation: scrollList 30s linear infinite; /* New animation for scrolling */
     }
 
     .donorItem {
@@ -92,15 +103,35 @@
       height: 60px;
     }
 
-    @media only screen and (min-width: 1024px) {
-      /* Adjust styles for larger screens */
-      #dashboardContainer {
-        padding: 50px;
+    @keyframes rotate {
+      from {
+        transform: translateY(0);
       }
-      #leftPanel, #rightPanel {
-        flex: 0.5;
-        height: calc(100vh - 100px);
+
+      to {
+        transform: translateY(calc(-100% - 20px));
       }
+    }
+
+    @keyframes scrollList {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(calc(-100% - 20px));
+      }
+    }
+
+    #totalAmount,
+    #totalDonors {
+      margin: 0;
+    }
+
+    #totalAmount span,
+    #totalDonors span {
+      font-weight: bold;
+      color: #2ecc71;
     }
   </style>
 </head>
@@ -129,7 +160,9 @@
       </div>
     </div>
     <div id="rightPanel">
-      <div id="donorContainer"></div>
+      <div id="rotatingBox">
+        <div id="donorContainer"></div>
+      </div>
     </div>
   </div>
 
@@ -143,23 +176,4 @@
       donorContainer.innerHTML = '';
 
       data.names.forEach(function (name, index) {
-        var donorItem = document.createElement('div');
-        donorItem.className = 'donorItem';
-        donorItem.innerHTML = `<div>${name}</div><div>${"$" + data.amounts[index]}</div>`;
-        donorContainer.appendChild(donorItem);
-      });
-    }
-
-    // Fetch data from the server every 15 seconds
-    function fetchData() {
-      google.script.run.withSuccessHandler(updateDisplay).getData();
-      setTimeout(fetchData, 15000); // Update every 15 seconds
-    }
-
-    // Initial fetch when the page loads
-    window.onload = function () {
-      fetchData();
-    };
-  </script>
-</body>
-</html>
+        var
