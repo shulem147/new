@@ -57,7 +57,7 @@
     }
 
     #rotatingBox {
-      width: 70%;
+      width: 80%;
       height: 70vh;
       border: 2px solid #2ecc71;
       border-radius: 10px;
@@ -89,7 +89,7 @@
 
     @keyframes rotate {
       from { transform: translateY(0); }
-      to { transform: translateY(-100%); }
+      to { transform: translateY(calc(-100% - 40px)); }
     }
 
     #totalAmount {
@@ -137,10 +137,10 @@
       });
     }
 
-    // Fetch data from the server every few seconds
+    // Fetch data from the server every 15 seconds
     function fetchData() {
       google.script.run.withSuccessHandler(updateDisplay).getData();
-      setTimeout(fetchData, 10000); // Adjust the interval as needed
+      setTimeout(fetchData, 15000); // Update every 15 seconds
     }
 
     // Initial fetch when the page loads
