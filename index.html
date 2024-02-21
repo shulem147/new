@@ -11,7 +11,6 @@
       background-color: #f4f4f4;
       margin: 0;
       padding: 0;
-      overflow: hidden;
     }
 
     .header {
@@ -43,8 +42,6 @@
 
     #donorContainer {
       width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
     }
 
     .donorItem {
@@ -66,26 +63,13 @@
       color: #2ecc71;
       margin-bottom: 20px;
     }
-
-    .scrolling-container {
-      animation: scroll 20s linear infinite;
-    }
-
-    @keyframes scroll {
-      0% {
-        transform: translateY(100%);
-      }
-      100% {
-        transform: translateY(-100%);
-      }
-    }
   </style>
 </head>
 <body>
   <div class="header">Pledge Tracker</div>
   <div id="totalAmountHeader" class="header">Total Amount Raised: $<span></span></div>
   <div id="container">
-    <div id="donorContainer" class="scrolling-container"></div>
+    <div id="donorContainer"></div>
   </div>
 
   <script>
@@ -100,17 +84,12 @@
         donorContainer.innerHTML = '';
 
         if (data.names.length > 0) {
-          var scrollingContainer = document.createElement('div');
-          scrollingContainer.className = 'scrolling-container';
-
           data.names.forEach(function (name, index) {
             var donorItem = document.createElement('div');
             donorItem.className = 'donorItem';
             donorItem.textContent = name + ": $" + data.amounts[index];
-            scrollingContainer.appendChild(donorItem);
+            donorContainer.appendChild(donorItem);
           });
-
-          donorContainer.appendChild(scrollingContainer);
         }
       }
     }
