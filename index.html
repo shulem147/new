@@ -48,14 +48,13 @@
 
     #donorInfoContainer {
       max-height: 200px; /* Adjust the height as needed */
-      overflow: hidden;
+      overflow-y: auto;
     }
 
     #donorInfo {
       font-size: 18px;
       color: #333;
       text-align: left;
-      animation: rotateAnimation 20s linear infinite; /* Adjust the duration as needed */
     }
 
     .donorEntry {
@@ -77,15 +76,6 @@
     .donorAmount {
       text-align: right;
       color: #2ecc71;
-    }
-
-    @keyframes rotateAnimation {
-      0%, 100% {
-        transform: translateY(0%);
-      }
-      50% {
-        transform: translateY(-100%);
-      }
     }
   </style>
 </head>
@@ -113,8 +103,7 @@
       var totalAmount = data.amounts.reduce((total, amount) => total + amount, 0);
       document.getElementById('totalAmountValue').textContent = totalAmount;
 
-      // Reverse the order of donor entries (LIFO)
-      var donorList = data.names.slice().reverse().map(function (name, index) {
+      var donorList = data.names.map(function (name, index) {
         return '<div class="donorEntry"><div class="donorName">' + name + '</div><div class="donorAmount">$' + data.amounts[index] + '</div></div>';
       });
 
