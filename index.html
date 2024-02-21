@@ -6,115 +6,206 @@
   <title>Pledge Dashboard</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      background-color: #f4f4f4;
+      padding-bottom: 0;
+      font-family: 'ProximaNova', sans-serif;
       margin: 0;
       padding: 0;
       overflow: hidden;
     }
 
     header {
-      background-color: #2ecc71;
-      color: #fff;
-      padding: 20px;
-      font-size: 28px;
-      position: fixed;
       width: 100%;
-      top: 0;
-      z-index: 1;
-      text-align: center;
+      border-bottom: 1px solid #ddd;
+      height: 64px;
     }
 
-    #dashboardContainer {
+    .tb_name {
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .camp_outer_wrap {
+      padding-top: 20px;
+      width: 100%;
+      height: calc(100vh - 64px);
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-top: 80px;
-      padding: 20px;
-      overflow: hidden;
-      height: calc(100vh - 100px);
+      justify-content: center;
+      max-width: none;
     }
 
-    #leftPanel {
-      flex: 1;
-      text-align: left;
-    }
-
-    #causeBox,
-    #leftPanelBox {
-      background-color: #fff;
-      border: 2px solid #2ecc71;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    #leftPanelBox {
-      height: 100%;
-    }
-
-    #rightPanel {
-      flex: 1;
-      text-align: right;
-    }
-
-    #rotatingBox {
-      width: 80%;
-      height: 70vh;
-      border: 2px solid #2ecc71;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 10px auto;
-      animation: rotate 30s infinite linear;
-    }
-
-    #donorContainer {
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-
-    .donorItem {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      white-space: nowrap;
-      font-size: 22px;
-      height: 60px;
-    }
-
-    @keyframes rotate {
-      from {
-        transform: translateY(0);
-      }
-
-      to {
-        transform: translateY(calc(-100% - 20px));
-      }
-    }
-
-    #totalAmount,
-    #totalDonors {
+    .screen_wrap .camp_main_left,
+    .screen_wrap .camp_main_right {
+      width: 50%;
+      padding: 0 10px;
       margin: 0;
     }
 
-    #totalAmount span,
-    #totalDonors span {
-      font-weight: bold;
-      color: #2ecc71;
+    .screen_wrap .camp_main_left {
+      width: 40%;
+    }
+
+    .donor_scroll_wrap {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .scroll_ttl {
+      height: 4vw;
+    }
+
+    .scroll_ttl span {
+      font-size: 1.2vw !important;
+      font-style: italic;
+    }
+
+    .dw_wrapper {
+      height: calc(100vh - 200px);
+      overflow: hidden;
+    }
+
+    .dw_single {
+      min-height: 10%;
+      padding: 15px 5px;
+    }
+
+    p.dw_name,
+    .dw_amount {
+      font-size: 1.4vw !important;
+    }
+
+    .dw_text p {
+      font-size: 16px;
+      font-style: italic;
+    }
+
+    .view_all_btn,
+    .to_donate_btn {
+      display: none;
+    }
+
+    .countdown_wrap .goal_wrap {
+      height: calc(100vh - 130px);
+    }
+
+    .countdown_ttl {
+      font-size: 1.8vw;
+    }
+
+    #cd_day,
+    #cd_hour,
+    #cd_min,
+    #cd_sec {
+      font-size: 3vw;
+    }
+
+    .sin_cd_wrap {
+      width: 104px;
+    }
+
+    .sin_cd_wrap p {
+      font-size: 1.8vw;
+    }
+
+    .dial_goal_wrap {
+      width: 75%;
+      padding-top: 75%;
+      position: relative;
+      margin: 50px auto;
+    }
+
+    .dial_goal_progress {
+      width: 100% !important;
+      height: 100% !important;
+      top: 0;
+      left: 0;
+      position: absolute;
+    }
+
+    .goal_warpper {
+      top: 35%;
+    }
+
+    .gw_ttl,
+    .bw_b_ttl {
+      font-size: 2vw;
+    }
+
+    .gw_number,
+    .bw_b_number {
+      font-size: 4.4vw;
+    }
+
+    .goal_percent_number {
+      margin-top: -17vh;
+    }
+
+    .gpn_ttl {
+      font-size: 2vw;
+    }
+
+    .gpn_number {
+      font-size: 6.4vw;
+    }
+
+    .bw_o_ttl {
+      font-size: 1vw;
+    }
+
+    .bw_o_number {
+      font-size: 1.8vw;
+    }
+
+    .dw_amount {
+      flex-direction: column;
+      align-items: flex-end;
+      height: auto;
+    }
+
+    .dw_amount span {
+      font-size: 1.2vw !important;
+      color: #999;
+    }
+
+    .fixed_side_tab {
+      position: fixed;
+      left: 0;
+      top: calc(35vh - 100px);
+      width: 13vw;
+      height: auto;
+      padding: 30px 0;
+      border-radius: 0 10px 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    }
+
+    .donor_count_dynamic {
+      font-size: 5.5vh;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .fixed_side_tab p {
+      font-size: 1.4vw;
+      text-align: center;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <header>Pledge Dashboard</header>
+  <header class="screen_topbar">
+    <div class="tb_name">Pledge Dashboard</div>
+  </header>
+  <div class="camp_outer_wrap">
+    <div class="screen_wrap">
+      <div class="camp_main_left"></div>
+      <div class="camp_main_right"></div>
+    </div>
+  </div>
+
+  <!-- Placeholder for fetching data from App Script -->
   <div id="dashboardContainer">
     <div id="leftPanel">
       <div id="causeBox">
@@ -134,19 +225,22 @@
   </div>
 
   <script>
+    // Fetch data from the server (replace YOUR_APP_SCRIPT_ENDPOINT with the actual endpoint)
     async function fetchData() {
       try {
-        const response = await fetch('/getData'); // Adjust the endpoint accordingly
+        const response = await fetch('YOUR_APP_SCRIPT_ENDPOINT'); // Adjust the endpoint accordingly
         const data = await response.json();
 
         updateDisplay(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setTimeout(fetchData, 15000); // Update every 15 seconds
+        // Adjust the timeout for how often you want to fetch data (currently set to every 15 seconds)
+        setTimeout(fetchData, 15000);
       }
     }
 
+    // Update the display with fetched data
     function updateDisplay(data) {
       const totalAmount = data.amounts.reduce((sum, amount) => sum + amount, 0);
       document.getElementById('totalAmount').querySelector('span').textContent = totalAmount;
@@ -155,7 +249,7 @@
       const donorContainer = document.getElementById('donorContainer');
       donorContainer.innerHTML = '';
 
-      data.names.forEach((name, index) => {
+      data.names.forEach(function (name, index) {
         const donorItem = document.createElement('div');
         donorItem.className = 'donorItem';
         donorItem.innerHTML = `<div>${name}</div><div>${"$" + data.amounts[index]}</div>`;
