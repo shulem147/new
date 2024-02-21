@@ -65,7 +65,7 @@
       font-size: 18px;
       color: #333;
       text-align: left;
-      overflow: hidden;
+      animation: rotateAnimation 10s linear infinite;
     }
 
     .donorEntry {
@@ -73,7 +73,7 @@
       justify-content: space-between;
       padding: 10px;
       border-bottom: 1px solid #ddd;
-      animation: rotateAnimation 30s linear infinite;
+      animation: donationFall 5s linear infinite; /* Adjust the duration as needed */
     }
 
     .donorName {
@@ -89,6 +89,16 @@
     }
 
     @keyframes rotateAnimation {
+      0%, 100% {
+        transform: translateY(0%);
+      }
+
+      50% {
+        transform: translateY(-100%);
+      }
+    }
+
+    @keyframes donationFall {
       0% {
         transform: translateY(-100%);
       }
@@ -120,6 +130,10 @@
 
   <script>
     function updateDisplay(data) {
+      // Reverse the data order for LIFO
+      data.names.reverse();
+      data.amounts.reverse();
+
       var donorList = data.names.map(function (name, index) {
         return '<div class="donorEntry"><div class="donorName">' + name + '</div><div class="donorAmount">$' + data.amounts[index] + '</div></div>';
       });
